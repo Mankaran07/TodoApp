@@ -18,8 +18,12 @@ const index_1 = require("../middleware/index");
 const index_2 = require("../db/index");
 const router = express_1.default.Router();
 const TodoSchema = zod_1.z.object({
-    title: zod_1.z.string().min(1).max(100),
-    description: zod_1.z.string().min(1).max(500)
+    title: zod_1.z.string()
+        .min(1, 'Title cannot be Empty')
+        .max(100, 'Title can only be of 100 words'),
+    description: zod_1.z.string()
+        .min(1, 'Description cannot be Empty')
+        .max(500, 'Description can only be of 500 words')
 });
 router.post('/todos', index_1.authenticateJwt, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const validateTodo = TodoSchema.safeParse(req.body);

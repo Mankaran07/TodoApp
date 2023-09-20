@@ -6,8 +6,12 @@ import { Todo } from "../db/index";
 const router = express.Router();
 
 const TodoSchema = z.object({
-  title: z.string().min(1).max(100),
-  description: z.string().min(1).max(500)
+  title: z.string()
+  .min(1 , 'Title cannot be Empty')
+  .max(100 , 'Title can only be of 100 words'),
+  description: z.string()
+  .min(1 , 'Description cannot be Empty')
+  .max(500 , 'Description can only be of 500 words')
 });
 
 router.post('/todos', authenticateJwt, async (req, res) => {
