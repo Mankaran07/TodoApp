@@ -7,7 +7,6 @@ import {
     Stack, 
     FormControlLabel,  
     } from '@mui/material';
-import './css/Signup.css'
 import AlertSnackbar from './Snackbar';
 import { useState } from 'react';
 import {useNavigate} from 'react-router-dom'
