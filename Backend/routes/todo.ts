@@ -31,7 +31,7 @@ router.post('/todos', authenticateJwt, async (req, res) => {
       const savedTodo = await newTodo.save();
       res.status(201).json(savedTodo);
     } catch (err) {
-      res.status(500).json({ error: 'Failed to create a new todo' });
+      res.status(500).json('Failed to create a new todo');
     }
 });
 
@@ -90,26 +90,27 @@ router.delete('/todos/:id' , authenticateJwt , async (req,res) => {
 });
 
 router.patch('/todos/:todoId/done', authenticateJwt, async (req, res) => {
-    try {
-      const { todoId } = req.params;
-      const userId = req.headers["userId"];
-  
-      const updatedTodo = await Todo.findOneAndUpdate(
-        { _id: todoId, userId },
-        { done: true },
-        { new: true }
-      );
-  
-      if (!updatedTodo) {
-        return res.status(404).json({ error: 'Todo not found' });
-      }
-  
-      res.json(updatedTodo);
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Failed to update todo' });
+  try {
+    const { todoId } = req.params;
+    const userId = req.headers["userId"];
+
+    const todo = await Todo.findOne({ _id: todoId, userId });
+
+    if (!todo) {
+      return res.status(404).json({ error: 'Todo not found' });
     }
+
+    todo.done = !todo.done;
+
+    const updatedTodo = await todo.save();
+
+    res.json(updatedTodo);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to update todo' });
+  }
 });
+
 
 export default router;
 

@@ -1,44 +1,60 @@
 /* eslint-disable react/prop-types */
-import { Button, Card, Stack, TextField, Snackbar } from "@mui/material";
-import MuiAlert from '@mui/material/Alert';
-import { useState , forwardRef} from "react";
+import { Button, Card, Stack, TextField } from "@mui/material";
+import { useState } from "react";
+import AlertSnackbar from './Snackbar';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 const Form = ({addTodo}) => {
-    const url = "https://todoapp-backend-mc1o.onrender.com";
+    const navigate = useNavigate();
     const [title , setTitle] = useState("");
     const [description , setDescription] = useState("");
     const [open , setOpen] = useState(false);
-    const [error , setError] = useState(false);
-    const Alert = forwardRef(function Alert(props, ref) {
-        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-    });
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') return;
-        setOpen(false);
-        setError(false);
-    };
+    const [snackbarMessage , setSnackbarMessage] = useState("");
+    const [color , setColor] = useState("info");
     const addNew = async () => {
         try {
-            const res = await axios.post(url + '/todos', {
-              title,
-              description,
-            }, {
+            const url = "http://localhost:3004/todo";
+            const data = {
+                title: title,
+                description: description
+            };
+            const token = localStorage.getItem('token');
+            if(!token) {
+                setOpen(true);
+                setSnackbarMessage("Login to add todo");
+                setColor("info");
+                setTimeout(() => {
+                    navigate('/');
+                }, 2000);
+                return;
+            }
+            const response = await axios.post(url+'/todos', data , {
               headers: {
                 'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
               },
             });
-            addTodo(res.data)
+            addTodo(response.data)
+            // console.log(response);
             setOpen(true);
+            setSnackbarMessage("Todo Added");
+            setColor("success");
             setTitle('');
             setDescription('');
         } 
         catch (error) {
-            setError(true);
+            console.error(error);
+            setOpen(true);
+            setSnackbarMessage("Something happened");
+            setColor("error");
             setTitle('');
             setDescription('');
         }
+    };
+    const handleCloseSnackbar = () => {
+        setOpen(false);
     };
     return(
         <Stack 
@@ -76,16 +92,12 @@ const Form = ({addTodo}) => {
                 />
                 <Button variant="contained" size="large" style={{width:"30%"}} onClick={addNew}>Submit</Button>
             </Card>
-            <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
-                <Alert variant="filled" onClose={handleClose} severity="success" sx={{ width: '200%' , fontSize: 20 }}>
-                    Todo Added Successfully!!!
-                </Alert>
-            </Snackbar>
-            <Snackbar open={error} autoHideDuration={4000} onClose={handleClose}>
-                <Alert variant="filled" onClose={handleClose} severity="error" sx={{ width: '200%' , fontSize: 20 }}>
-                    Title or Desciption Required!!!
-                </Alert>
-            </Snackbar>
+            <AlertSnackbar 
+            open={open} 
+            onClose={handleCloseSnackbar} 
+            message={snackbarMessage} 
+            color = {color}
+            />
         </Stack>
     )
 }

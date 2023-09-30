@@ -41,7 +41,7 @@ router.post('/todos', index_1.authenticateJwt, (req, res) => __awaiter(void 0, v
         res.status(201).json(savedTodo);
     }
     catch (err) {
-        res.status(500).json({ error: 'Failed to create a new todo' });
+        res.status(500).json('Failed to create a new todo');
     }
 }));
 router.get('/todos', index_1.authenticateJwt, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -93,10 +93,12 @@ router.patch('/todos/:todoId/done', index_1.authenticateJwt, (req, res) => __awa
     try {
         const { todoId } = req.params;
         const userId = req.headers["userId"];
-        const updatedTodo = yield index_2.Todo.findOneAndUpdate({ _id: todoId, userId }, { done: true }, { new: true });
-        if (!updatedTodo) {
+        const todo = yield index_2.Todo.findOne({ _id: todoId, userId });
+        if (!todo) {
             return res.status(404).json({ error: 'Todo not found' });
         }
+        todo.done = !todo.done;
+        const updatedTodo = yield todo.save();
         res.json(updatedTodo);
     }
     catch (err) {

@@ -57,7 +57,7 @@ const SignUp = () => {
                 pt={15}
                 >
                 <Typography variant='h4' color={'#112D4E'}>
-                    Welcome to <strong>ToDo</strong>. Sign Up Below
+                    Welcome to <strong>Taskify</strong>. Sign Up Below
                 </Typography>
 
             </Stack>
