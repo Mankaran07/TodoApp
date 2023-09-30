@@ -1,4 +1,3 @@
-import './css/SignUp.css'
 import { Card, Typography, TextField, Button , Stack } from '@mui/material';
 import { useState } from 'react';
 import AlertSnackbar from './Snackbar';
