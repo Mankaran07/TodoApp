@@ -18,7 +18,7 @@ Taskify is a full-stack web application designed to help users efficiently manag
 
 ## Technologies Used
 
-- *Backend*: Express.js
+- *Backend*: TypeScript , Express.js
 - *Frontend*: React.js, Material-UI (MUI)
 - *Database*: MongoDB
 - *Deployment*: Render
