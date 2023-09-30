@@ -5,8 +5,7 @@ import {
     Button, 
     Checkbox, 
     Stack, 
-    FormControlLabel, 
-    Link 
+    FormControlLabel,  
     } from '@mui/material';
 import './css/Signup.css'
 import AlertSnackbar from './Snackbar';
@@ -20,14 +19,14 @@ const SignIn = () => {
     const [open , setOpen] = useState(false);
     const [snackbarMessage , setSnackbarMessage] = useState("");
     const [color , setColor] = useState("info");
+    const url = "http://localhost:3004/auth";
     const validate = async () => {
         try {
-            const url = "http://localhost:3004/auth/login";
             const data = {
                 email: email,
                 password: password
             };
-            const response = await axios.post(url , data);
+            const response = await axios.post(url + '/login' , data);
             const message = response.data.message;
             let token = undefined;
             if(response.data.token) {
@@ -40,7 +39,7 @@ const SignIn = () => {
             setSnackbarMessage(message);
             setTimeout(function() {
                 navigate('/todo');
-            },2000);
+            },1000);
         }
         catch(error) {
             console.error('Error:' , error);
@@ -89,7 +88,6 @@ const SignIn = () => {
                         type='Password' />
                     <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'} >
                         <FormControlLabel control={<Checkbox size="medium" />} label="Remember me" />
-                        <Link href="#" color="inherit" fontSize={18} underline='none'><i>Forget Password?</i></Link>
                     </Stack>
                     <Button 
                         variant='contained' 

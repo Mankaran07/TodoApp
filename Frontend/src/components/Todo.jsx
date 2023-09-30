@@ -21,6 +21,7 @@ const Todo = () => {
 
   useEffect(() => {
     fetchTodos();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   } , []);
 
   const checkTokenAndRedirect = () => {
@@ -50,7 +51,7 @@ const Todo = () => {
     } catch (error) {
       setTimeout(() => {
         navigate('/');
-      }, 2000);
+      }, 1000);
       handleError(error);
     }
   };

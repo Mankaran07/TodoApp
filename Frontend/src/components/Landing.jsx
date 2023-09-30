@@ -1,4 +1,5 @@
-import { Stack , Typography} from "@mui/material";
+import {Box , Stack , Typography} from "@mui/material";
+import logo from './asset/asset-1.png'
 import './css/Landing.css'
 
 const Landing = () => {
@@ -21,6 +22,11 @@ const Landing = () => {
                     <Typography variant="subtitle1" fontSize={20} fontFamily={'Segoe UI'}>Ready to get started? Click the <strong><i>Sign Up</i></strong> button to create your account now!</Typography>
                 </Stack>
                 <Stack justifyContent={"flex-start"} alignItems={"center"}>
+                </Stack>
+                <Stack justifyContent={"flex-start"} alignItems={"center"}>
+                <Box marginTop={-8}> {/* Adjust the margin to lift the image */}
+                    <img src={logo} alt="Image" width={"100%"} />
+                </Box>
                 </Stack>
             </Stack>
         </div>

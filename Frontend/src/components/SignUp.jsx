@@ -13,17 +13,17 @@ const SignUp = () => {
     const [open , setOpen] = useState(false);
     const [snackbarMessage , setSnackbarMessage] = useState("");
     const [color , setColor] = useState("info");
-
+    const url = "http://localhost:3004/auth";
     const validate = async () => {
         try {
-            const url = "http://localhost:3004/auth/signup";
+            
             const data = {
                 username: username,
                 email: email,
                 password: password
             };
 
-            const response = await axios.post(url , data);
+            const response = await axios.post(url + '/signup' , data);
             const {message , token} = response.data;
             localStorage.setItem('token' , token);
             setOpen(true);
@@ -31,7 +31,7 @@ const SignUp = () => {
             setSnackbarMessage(message);
             setTimeout(function() {
                 navigate('/todo');
-            },2000);
+            },1000);
         }
         catch(error){
             console.error('Error:' , error);
