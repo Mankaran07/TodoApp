@@ -11,6 +11,32 @@ import AlertSnackbar from './Snackbar';
 import { useState } from 'react';
 import {useNavigate} from 'react-router-dom'
 import axios from 'axios';
+
+const upperTextStyle = {
+    paddingTop: '150px',
+    display: 'flex',
+    justifyContent: 'center',
+};
+  
+const cardBoxStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    letterSpacing: '0',
+};
+  
+const cardSignInStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignContent: 'space-around',
+    minWidth: '30%',
+    height: '50vh',
+    padding: '20px',
+    margin: '0',
+    border: '1px solid rgba(0,0,0,0.5)',
+    borderRadius: '20px',
+};
+
 const SignIn = () => {
     const navigate = useNavigate();
     const [email , setEmail] = useState("");
@@ -61,6 +87,7 @@ const SignIn = () => {
                 justifyContent={'center'}
                 alignItems={'center'}
                 pt={15}
+                style={upperTextStyle}
             >
                 <Typography variant='h4' color={'#112D4E'}>
                     Welcome Back. Login Below
@@ -72,8 +99,9 @@ const SignIn = () => {
                 justifyContent={'center'}
                 alignItems={'center'}
                 pt={3}
+                style={cardBoxStyle}
             >
-                <Card variant="outlined" className='card-Signup'>
+                <Card variant="outlined" style={cardSignInStyle}>
                 <TextField 
                         variant='outlined' 
                         onChange= {e => setEmail(e.target.value)}

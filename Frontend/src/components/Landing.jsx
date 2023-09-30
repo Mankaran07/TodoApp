@@ -1,17 +1,26 @@
 import {Box , Stack , Typography} from "@mui/material";
 import logo from './asset/asset-1.png'
-import './css/Landing.css'
+const cardStyle = {
+    marginTop: '100px',
+};
 
+const boxStyle = {
+    backgroundColor: '#8fd0ea',
+    borderRadius: '10px',
+    width: '97vw',
+    height: '50vh',
+};
 const Landing = () => {
     return(
         <>
-        <div className="card">
+        <div className="card" style={cardStyle}>
             <Stack
                 direction={"row"}
                 justifyContent={"space-around"}
                 spacing={0}
                 color={'#112D4E'}
                 className="box"
+                style={boxStyle}
             >
                 <Stack
                     alignItems={"flex-start"}

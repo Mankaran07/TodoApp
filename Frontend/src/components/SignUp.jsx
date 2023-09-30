@@ -5,6 +5,31 @@ import AlertSnackbar from './Snackbar';
 import {useNavigate} from 'react-router-dom'
 import axios from 'axios';
 
+const upperTextStyle = {
+    paddingTop: '150px',
+    display: 'flex',
+    justifyContent: 'center',
+};
+  
+const cardBoxStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    letterSpacing: '0',
+};
+  
+const cardSignUpStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignContent: 'space-around',
+    minWidth: '30%',
+    height: '50vh',
+    padding: '20px',
+    margin: '0',
+    border: '1px solid rgba(0,0,0,0.5)',
+    borderRadius: '20px',
+};
+
 const SignUp = () => {
     const navigate = useNavigate();
     const [username , setUsername] = useState("");
@@ -55,6 +80,7 @@ const SignUp = () => {
                 justifyContent={'center'}
                 alignItems={'center'}
                 pt={15}
+                style={upperTextStyle}
                 >
                 <Typography variant='h4' color={'#112D4E'}>
                     Welcome to <strong>Taskify</strong>. Sign Up Below
@@ -66,8 +92,9 @@ const SignUp = () => {
                 justifyContent={'center'}
                 alignItems={'center'}
                 pt={3}
+                style={cardBoxStyle}
             >
-                <Card variant="outlined" className='card-Signup'>
+                <Card variant="outlined" style={cardSignUpStyle}>
                 <TextField 
                         variant='outlined' 
                         onChange= {e => setUsername(e.target.value)}

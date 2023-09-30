@@ -1,9 +1,12 @@
 import { Button, Divider, Typography, Stack } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
-import './css/AppBar.css';
 import { useState , useEffect } from "react";
 import AlertSnackbar from "./Snackbar";
 import axios from 'axios';
+const navBarStyle = {
+    paddingRight: '50px',
+    paddingLeft: '20px',
+};
 
 const AppBar = () => {
     const navigate = useNavigate();
@@ -53,6 +56,7 @@ const AppBar = () => {
             justifyContent={"space-between"}
             alignItems={"baseline"}
             className="nav-bar"
+            style={navBarStyle}
         >
             <Stack>
                 <div onClick={() => {navigate('/')}} style={{ cursor: "pointer" }}>
