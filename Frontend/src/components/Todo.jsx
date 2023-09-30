@@ -8,7 +8,7 @@ import AlertSnackbar from './Snackbar';
 
 const Todo = () => {
   const navigate = useNavigate();
-  const url = 'http://localhost:3004/todo';
+  const url = import.meta.env.VITE_url;
   const axiosInstance = axios.create({
     baseURL: url,
   });
@@ -42,7 +42,7 @@ const Todo = () => {
     try {
       if (!checkTokenAndRedirect()) return;
 
-      const response = await axiosInstance.get('/todos', {
+      const response = await axiosInstance.get('/todo/todos', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
@@ -85,7 +85,7 @@ const Todo = () => {
     try {
       if (!checkTokenAndRedirect()) return;
 
-      await axiosInstance.put(`/todos/${updatedTodo.todoId}`, updatedTodo, {
+      await axiosInstance.put(`/todo/todos/${updatedTodo.todoId}`, updatedTodo, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
@@ -100,7 +100,6 @@ const Todo = () => {
       setSnackbarMessage('Todo Updated Successfully!!!');
       setColor('success');
 
-      // Call fetchTodos after successful update
       fetchTodos();
     } catch (error) {
       handleError(error);
@@ -111,7 +110,7 @@ const Todo = () => {
     try {
       if (!checkTokenAndRedirect()) return;
 
-      await axiosInstance.delete(`/todos/${todoId}`, {
+      await axiosInstance.delete(`/todo/todos/${todoId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
@@ -134,16 +133,13 @@ const Todo = () => {
     try {
       if (!checkTokenAndRedirect()) return;
   
-      const response = await axiosInstance.patch(`/todos/${todoId}/done`, null, {
+      const response = await axiosInstance.patch(`/todo/todos/${todoId}/done`, null, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
-          userId: localStorage.getItem('userId'), // Include the userId in the headers
+          userId: localStorage.getItem('userId'),
         },
       });
-  
-      // Check if the response contains the updated todo
       if (response.data) {
-        // Toggle the "done" property by reversing its current value
         const updatedTodos = todos.map((todo) => {
           if (todo._id === todoId) {
             return { ...todo, done: !todo.done };
@@ -155,10 +151,8 @@ const Todo = () => {
         setSnackbarMessage('Todo status updated');
         setColor('success');
   
-        // Call fetchTodos to refresh the list
         fetchTodos();
       } else {
-        // Handle the case where the backend does not return the updated todo
         handleError({ response: { data: { error: 'Todo not found' } } });
       }
     } catch (error) {

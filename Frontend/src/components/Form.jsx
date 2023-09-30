@@ -13,9 +13,9 @@ const Form = ({addTodo}) => {
     const [open , setOpen] = useState(false);
     const [snackbarMessage , setSnackbarMessage] = useState("");
     const [color , setColor] = useState("info");
+    const url = import.meta.env.VITE_url;
     const addNew = async () => {
         try {
-            const url = "http://localhost:3004/todo";
             const data = {
                 title: title,
                 description: description
@@ -30,7 +30,7 @@ const Form = ({addTodo}) => {
                 }, 2000);
                 return;
             }
-            const response = await axios.post(url+'/todos', data , {
+            const response = await axios.post(url+'/todo/todos', data , {
               headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`

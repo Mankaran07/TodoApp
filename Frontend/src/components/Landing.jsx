@@ -24,7 +24,7 @@ const Landing = () => {
                 <Stack justifyContent={"flex-start"} alignItems={"center"}>
                 </Stack>
                 <Stack justifyContent={"flex-start"} alignItems={"center"}>
-                <Box marginTop={-8}> {/* Adjust the margin to lift the image */}
+                <Box marginTop={-8}>
                     <img src={logo} alt="Image" width={"100%"} />
                 </Box>
                 </Stack>

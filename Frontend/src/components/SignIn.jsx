@@ -19,14 +19,14 @@ const SignIn = () => {
     const [open , setOpen] = useState(false);
     const [snackbarMessage , setSnackbarMessage] = useState("");
     const [color , setColor] = useState("info");
-    const url = "http://localhost:3004/auth";
+    const url = import.meta.env.VITE_url;
     const validate = async () => {
         try {
             const data = {
                 email: email,
                 password: password
             };
-            const response = await axios.post(url + '/login' , data);
+            const response = await axios.post(url + '/auth/login' , data);
             const message = response.data.message;
             let token = undefined;
             if(response.data.token) {

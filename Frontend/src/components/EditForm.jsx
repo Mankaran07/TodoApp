@@ -13,8 +13,7 @@ const EditForm = ({ todo, onUpdate, onCancel }) => {
   const [color , setColor] = useState("info");
   const navigate = useNavigate();
   const handleSubmit = async () => {
-  console.log(todo._id);
-  const url = "http://localhost:3004/todo"
+  const url = import.meta.env.VITE_url;
     try {
       const token = localStorage.getItem('token');
       if(!token) {
@@ -31,7 +30,7 @@ const EditForm = ({ todo, onUpdate, onCancel }) => {
         description: description,
         todoId: todo._id
       };
-      await axios.put(url + `/todos/${todo._id}`, updatedTodo , {
+      await axios.put(url + `/todo/todos/${todo._id}`, updatedTodo , {
         headers: {
           Authorization: `Bearer ${token}`,
         },

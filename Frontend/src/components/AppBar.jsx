@@ -12,12 +12,12 @@ const AppBar = () => {
     const [snackbarMessage, setSnackbarMessage] = useState('');
     const [color, setColor] = useState('info');
     const token = localStorage.getItem('token'); 
-    const url = 'http://localhost:3004/auth';
+    const url = import.meta.env.VITE_url;
     useEffect(() => {
         const fetchUsername = async () => {
             try {
                 if (token) {
-                    const response = await axios.get(url + '/me', {
+                    const response = await axios.get(url + '/auth/me', {
                         headers: {
                             Authorization: `Bearer ${token}`,
                         },
@@ -31,6 +31,7 @@ const AppBar = () => {
         };
 
         fetchUsername();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token]);
 
     const handleLogout = () => {
