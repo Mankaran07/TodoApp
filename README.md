@@ -1,20 +1,27 @@
-# Todo Website
+# Taskify
 
-A full-stack web application for managing todos. This project utilizes Express.js as the backend API server, React.js as the frontend framework, and Material-UI (MUI) for the UI components.
+Taskify is a full-stack web application designed to help users efficiently manage their tasks and to-do items. The project consists of both backend and frontend components, each serving a unique purpose to create a seamless task management experience.
 
-## Features
+## Backend
 
-- Create new todos with a title and description.
-- View a list of existing todos.
-- Update and modify existing todos.
-- Delete todos.
+- **Written in TypeScript**: The backend of Taskify is implemented in TypeScript, which provides type safety and enhanced code quality.
+- **Express Server**: It utilizes the Express.js framework to build a robust and scalable server.
+- **MongoDB Database**: Taskify uses MongoDB as its database system, ensuring efficient data storage and retrieval.
+- **JWT Authentication**: Authentication of users is handled through JSON Web Tokens (JWT), enhancing the security of the application.
+- **Zod for Validations**: Zod is used for data validation, ensuring that only valid data is processed.
+
+## Frontend
+
+- **Built with React and Vite**: The frontend of Taskify is developed using React, a popular JavaScript library, and Vite for a fast development environment.
+- **Axios for API Calls**: Axios is employed to interact with the backend API routes, enabling seamless communication between the frontend and backend.
+- **Material UI**: Material UI is used to enhance the user interface and provide a clean and appealing design to the application.
 
 ## Technologies Used
 
-- Backend: Express.js
-- Frontend: React.js, Material-UI (MUI)
-- Database: Local JSON File
-- Deployment: Render
+- *Backend*: Express.js
+- *Frontend*: React.js, Material-UI (MUI)
+- *Database*: MongoDB
+- *Deployment*: Render
 
 ## Online Deployed Site
 
@@ -32,18 +39,6 @@ Visit the deployed site to interact with the Todo App.
 
 ### Usage
 
-1. Start the backend server: `cd backend && node todos.js`.
+1. Start the backend server: `cd backend/dist && node index.js`.
 2. Start the frontend development server: `cd frontend && npm dev start`.
 3. Access the application in your browser at `http://localhost:5173`.
-
-## Technologies Used
-
-- Express.js: A fast and minimalist web application framework for Node.js.
-- ReactJS and MUI: Used for creating the frontend of the Todo App.
-
-## API Routes
-
-- `GET /todos:` Get all todos.
-- `POST /todos:` Create a new todo.
-- `DELETE /todos/:id:` Delete a todo with the specified ID.
-- `PUT /todos/:id:` Update a todo with the specified ID.
